@@ -1,12 +1,11 @@
 package com.notas.notas.controller;
 
+import com.notas.notas.model.Note;
 import com.notas.notas.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
@@ -23,4 +22,30 @@ public class NoteController {
         model.addAttribute("notes", noteService.findAll());
         return "index";
     }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        model.addAttribute("noteID", noteService.findById(id));
+        return "showNote";
+    }
+
+    @PostMapping("/")
+    public String save(Note note) {
+        noteService.save(note);
+        return "index";
+    }
+
+    @DeleteMapping("/")
+    public String delete(Note note) {
+        noteService.delete(note);
+        return "index";
+    }
+
+    @PutMapping("/")
+    public String update(Note note) {
+        noteService.save(note);
+        return "index";
+    }
+
+
 }
