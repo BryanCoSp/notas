@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script th:src="@{/js/scripts.js}"></script>
 </head>
 <body>
+    <h1>Listado de notas</h1>
     <ul>
         <li th:each="note : ${notes}">
             <strong th:text="${note.title}"></strong>
             <span th:text="${note.content}"></span>
         </li>
     </ul>
+
+    <form action="/submit" th:object="${note}" method="post">
+        <fieldset>
+            <input type="text" name="title" />
+            <input type="text" name="content" />
+            <button type="submit">Save note</button>
+        </fieldset>
+    </form>
+
+    <button id="loadFragmento" onclick="loadFragment(); console.log('click')">Cargar lista</button>
+
+    <div id="newNotePopup"></div>
 </body>
 </html>

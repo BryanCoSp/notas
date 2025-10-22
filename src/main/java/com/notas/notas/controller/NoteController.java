@@ -29,10 +29,15 @@ public class NoteController {
         return "showNote";
     }
 
-    @PostMapping("/")
-    public String save(Note note) {
+    @GetMapping("/newNote")
+    public String obtenerListaNotas(Model model) {
+        return "fragments/newNote :: popup";
+    }
+
+    @PostMapping("/submit")
+    public String save(@ModelAttribute Note note) {
         noteService.save(note);
-        return "index";
+        return "redirect:/";
     }
 
     @DeleteMapping("/")
