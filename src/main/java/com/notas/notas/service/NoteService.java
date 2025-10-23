@@ -29,6 +29,9 @@ public class NoteService {
     }
 
     public Note save(Note note) {
+        if(note.getTitle() == null || note.getTitle().isEmpty()){
+            note.setTitle("New note");
+        }
         return noteRepository.save(note);
     }
 
