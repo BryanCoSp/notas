@@ -1,6 +1,5 @@
 
 loadFragment = () => {
-    // document.getElementById("loadFragmento").addEventListener("click", function() {
         fetch("/newNote")
             .then(res => res.text())
             .then(html => {
@@ -8,7 +7,18 @@ loadFragment = () => {
                 element.innerHTML = html;
                 element.style.display = "inline-block";
             });
-    // });
 }
+
+hideFragment = () => {
+    let element = document.getElementById("newNotePopup");
+    element.innerHTML = "<div></div>";
+    element.style.display = "none";
+}
+
+// document.getElementById("newNotePopup").addEventListener("click", function() {
+//     let element = document.getElementById("newNotePopup");
+//     element.innerHTML = "<div></div>";
+//     element.style.display = "none";
+// });
 
 

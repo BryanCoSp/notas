@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-    <div id="mainBodyPopup" th:fragment="popup">
-
-    </div>
+<div id="mainBodyPopup" class="newNotePopupBody" th:fragment="popup">
+    <form action="/submit" th:object="${note}" method="post">
+        <div class="flexBox">
+            <div class="flexLine">
+                <button type="reset" onclick="hideFragment();">Cancel</button>
+                <h1>Add note</h1>
+                <button type="submit">Save note</button>
+            </div>
+            <input type="text" name="title" placeholder="Title" maxlength="100"/>
+            <textarea name="content" placeholder="Input your note content here... "></textarea>
+        </div>
+    </form>
+</div>
 </body>
 </html>
