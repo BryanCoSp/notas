@@ -5,22 +5,31 @@
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
     <script th:src="@{/js/scripts.js}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_2" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 
-<button id="loadFragmento" onclick="loadFragment();">New note</button>
+<h1 style="padding: 1em">Tus notas</h1>
 
-<div>
+<div id="noteListContainer">
+    <div id="createNoteButton" class="note" onclick="loadFragment()">
+        <i class="material-symbols-outlined" style="font-size: 48px;" >add_2</i>
+    </div>
+    <div th:each="note : ${notes}" class="note">
+        <div class="titleBar">
+            <span th:text="${note.title}"></span>
+            <div class="titleBarButtons">
+                <button class="editNoteButton"><i class="material-icons">edit</i></button>
+                <button class="deleteNoteButton"><i class="material-icons" style="font-size: 20px">delete</i></button>
+            </div>
+        </div>
+
+        <span th:text="${note.content}" class="noteContent"></span>
+    </div>
 
 </div>
 
-<h1>Tus notas</h1>
-<ul>
-    <li th:each="note : ${notes}">
-        <strong th:text="${note.title}"></strong>
-        <span th:text="${note.content}"></span>
-    </li>
-</ul>
 <div id="newNotePopup" class="newNote"></div>
 </body>
 </html>

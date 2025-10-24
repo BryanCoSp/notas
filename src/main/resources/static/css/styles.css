@@ -11,12 +11,12 @@
 }
 
 .newNotePopupBody {
-    background: white;
+    background: #FDFDFD;
     padding-top: 10px;
     padding-left: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 450px;
+    max-width: 400px;
     width: 100%;
     height: 100%;
     max-height: 500px;
@@ -47,26 +47,30 @@ form {
     width: 100%;
     height: 40px;
     margin: 15px auto;
-    border-radius: 10px;
+    border-radius: 4px;
     text-align: left;
+    border-color: #008CBA;
+    background-color: #FEFEFE;
 }
 
 .flexBox textarea {
     position: relative;
-    border-radius: 10px;
+    border-radius: 4px;
     height: 100%;
     width: 100%;
     margin-bottom: 20px;
     resize: none;
+    background-color: #FEFEFE;
+    border-color: #008CBA;
 }
 
-.flexLine{
+.flexLine {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#closePopup{
+#closePopup {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.0);
@@ -85,12 +89,97 @@ form {
 
 button {
     border: 2px solid #008CBA;
-    border-radius: 10px;
+    border-radius: 8px;
     transition-duration: 0.2s;
     padding: 8px;
+    background-color: white;
 }
 
 button:hover {
     background-color: #008CBA;
     color: white;
+}
+
+#noteListContainer {
+    display: grid;
+    padding: 1em;
+    gap: 1em;
+    margin: auto;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr))
+}
+
+#createNoteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.note {
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 28px;
+    max-width: 250px;
+    height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note:hover {
+    background-color: #a3e4ff;
+    transition-duration: 0.2s;
+}
+
+.titleBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    max-height: 50px;
+    text-overflow: clip;
+    border-bottom: 1px solid grey;
+}
+
+.titleBar span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.titleBarButtons {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    font-size: 24px;
+    justify-content: end;
+}
+
+.titleBarButtons button {
+    border: none;
+    background-color: transparent;
+}
+
+.deleteNoteButton {
+    color: red;
+}
+
+.deleteNoteButton:hover {
+    background-color: red;
+    transition-duration: 0.2s;
+    color: white;
+}
+
+.editNoteButton {
+    color: green;
+}
+.editNoteButton:hover {
+    background-color: green;
+    transition-duration: 0.2s;
+    color: white;
+}
+
+.noteContent {
+    padding: 8px;
+    font-size: 12px;
 }
