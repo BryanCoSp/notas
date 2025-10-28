@@ -1,5 +1,6 @@
 package com.notas.notas.controller;
 
+import com.notas.notas.exception.NoteNotFoundException;
 import com.notas.notas.model.Note;
 import com.notas.notas.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class NoteController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("noteID", noteService.findById(id));
+        model.addAttribute("note", noteService.findById(id).orElseThrow());
         return "showNote";
     }
 
@@ -40,13 +41,13 @@ public class NoteController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/delete")
     public String delete(Note note) {
         noteService.delete(note);
         return "index";
     }
 
-    @PutMapping("/")
+    @PutMapping("/updateNote")
     public String update(Note note) {
         noteService.save(note);
         return "index";
