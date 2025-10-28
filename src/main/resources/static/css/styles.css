@@ -58,7 +58,7 @@ form {
     border-radius: 4px;
     height: 100%;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     resize: none;
     background-color: #FEFEFE;
     border-color: #008CBA;
@@ -105,7 +105,8 @@ button:hover {
     padding: 1em;
     gap: 1em;
     margin: auto;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr))
+    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+    max-width: 75%;
 }
 
 #createNoteButton {
@@ -173,6 +174,7 @@ button:hover {
 .editNoteButton {
     color: green;
 }
+
 .editNoteButton:hover {
     background-color: green;
     transition-duration: 0.2s;
@@ -182,4 +184,14 @@ button:hover {
 .noteContent {
     padding: 8px;
     font-size: 12px;
+}
+
+.deleteButton{
+    border: 1px solid red;
+    width: fit-content;
+    margin: 10px auto;
+}
+
+.deleteButton:hover {
+    background-color: red;
 }
