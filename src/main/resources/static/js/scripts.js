@@ -1,5 +1,5 @@
 
-loadFragment = () => {
+loadNewNotePopup = () => {
         fetch("/newNote")
             .then(res => res.text())
             .then(html => {
@@ -11,6 +11,22 @@ loadFragment = () => {
 
 hideFragment = () => {
     let element = document.getElementById("newNotePopup");
+    element.innerHTML = "<div></div>";
+    element.style.display = "none";
+}
+
+showNote = (id) => {
+    fetch("/" + id)
+        .then(res => res.text())
+        .then(html => {
+            let element = document.getElementById("showNotePopup");
+            element.innerHTML = html;
+            element.style.display = "inline-block";
+        });
+}
+
+hideNote = () => {
+    let element = document.getElementById("showNotePopup");
     element.innerHTML = "<div></div>";
     element.style.display = "none";
 }
