@@ -18,18 +18,17 @@
         <i class="material-symbols-outlined" style="font-size: 48px;">add_2</i>
     </div>
     <div th:each="note : ${notes}" class="note" th:onclick="'showNote(' + ${note.id} + ')'">
-<!--        <a href="/" th:href="@{/{id}(id=${note.id})}" class="noteLink">-->
             <div class="titleBar" >
                 <span th:text="${note.title}"></span>
                 <div class="titleBarButtons">
-                    <form action="/delete">
+                    <form action="/delete" method="post">
+                        <input type="hidden" name="id" th:value="${note.getId()}">
                         <button class="deleteNoteButton"><i class="material-icons" style="font-size: 20px">delete</i>
                         </button>
                     </form>
                 </div>
             </div>
             <span th:text="${note.content}" class="noteContent"></span>
-<!--        </a>-->
     </div>
 </div>
 

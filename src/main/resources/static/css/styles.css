@@ -34,13 +34,21 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: 100%;
     margin-right: 20px;
 }
 
-form {
+.formStyle{
     height: 100%;
+    position: relative;
+    margin: auto;
+}
+
+.deleteFormStyle{
+    position: relative;
+    margin: auto;
+    bottom: auto;
 }
 
 .flexBox input {
@@ -58,6 +66,7 @@ form {
     border-radius: 4px;
     height: 100%;
     width: 100%;
+    max-height: 300px;
     margin-bottom: 10px;
     resize: none;
     background-color: #FEFEFE;
@@ -105,8 +114,10 @@ button:hover {
     padding: 1em;
     gap: 1em;
     margin: auto;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(200px, min-content));
     max-width: 75%;
+
 }
 
 #createNoteButton {
@@ -120,10 +131,12 @@ button:hover {
     border-radius: 8px;
     padding: 10px;
     font-size: 28px;
-    max-width: 250px;
+    max-width: 200px;
     height: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: flex;
+    flex-direction: column;
 }
 
 .note:hover {

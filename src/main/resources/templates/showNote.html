@@ -9,8 +9,8 @@
 <div id="mainBodyPopup" class="newNotePopupBody" th:fragment="popup">
 
     <div class="flexBox" th:object="${note}">
-        <form action="/updateNote" method="post">
-            <h3 style="margin: auto">Update Note</h3>
+        <h3 style="margin: auto">Update Note</h3>
+        <form action="/updateNote" method="post" class="formStyle">
             <div class="flexLine">
                 <button type="reset" onclick="hideNote();">Close</button>
                 <button type="submit">Update</button>
@@ -19,7 +19,8 @@
             <input type="text" name="title" th:value="${note.getTitle()}" placeholder="Title" maxlength="100"/>
             <textarea name="content" th:field="*{content}" placeholder="Input your note content here... "></textarea>
         </form>
-        <form action="/delete" method="post">
+        <form action="/delete" method="post" class="deleteFormStyle">
+            <input type="hidden" name="id" th:value="*{id}"/>
             <button class="deleteButton" type="submit">Delete note</button>
         </form>
     </div>
