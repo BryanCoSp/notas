@@ -1,9 +1,6 @@
 package com.notas.notas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -13,6 +10,7 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String content;
     private Date creation_date;
 

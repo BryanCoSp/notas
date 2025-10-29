@@ -41,16 +41,19 @@ public class NoteController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/delete")
-    public String delete(Note note) {
-        noteService.delete(note);
-        return "index";
+    @PostMapping("/delete")
+    public String delete(Long id) {
+        noteService.delete(id);
+        return "redirect:/";
     }
 
-    @PutMapping("/updateNote")
+    @PostMapping("/updateNote")
     public String update(Note note) {
         noteService.save(note);
-        return "index";
+        try {
+
+        }catch (NoteNotFoundException e) {}
+        return "redirect:/";
     }
 
 
