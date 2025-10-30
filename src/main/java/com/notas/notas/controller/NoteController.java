@@ -9,16 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
 public class NoteController {
-    private NoteService noteService;
+    private final NoteService noteService;
 
     @Autowired
-    public void NoteController(NoteService noteService) {
+    public NoteController(NoteService noteService) {
         this.noteService = noteService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("notes", noteService.findAll());
         return "index";
@@ -50,9 +49,6 @@ public class NoteController {
     @PostMapping("/updateNote")
     public String update(Note note) {
         noteService.save(note);
-        try {
-
-        }catch (NoteNotFoundException e) {}
         return "redirect:/";
     }
 

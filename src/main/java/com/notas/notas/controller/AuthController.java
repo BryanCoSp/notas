@@ -24,32 +24,30 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "redirect:/";
+        return "login";
     }
 
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("userDTO", new RegisterDTO("",""));
-        System.out.println("register view");
         return "register";
     }
 
     @PostMapping("/register")
     public String register(@ModelAttribute("userDTO") @Validated RegisterDTO registerDTO,Model model){
-        System.out.println("register REGISTRO");
-        if(appUserRepository.existsByUserName(registerDTO.userName)){
+        if(appUserRepository.existsByUsername(registerDTO.username)){
             model.addAttribute("error","El usuario ya existe");
             return "register";
         }
         AppUser appUser = new AppUser();
-        appUser.setUserName(registerDTO.userName);
+        appUser.setUsername(registerDTO.username);
         appUser.setPassword(passwordEncoder.encode(registerDTO.password));
         appUser.setRol("ROLE_USER");
         appUserRepository.save(appUser);
 
-        return "redirect:/login";
+        return "redirect:/login?registered";
     }
 
-    public record RegisterDTO(@NotBlank String userName, @NotBlank String password){}
+    public record RegisterDTO(@NotBlank String username, @NotBlank String password){}
 
 }

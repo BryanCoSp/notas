@@ -9,7 +9,7 @@ public class AppUser {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -19,9 +19,9 @@ public class AppUser {
 
     public AppUser() {}
 
-    public AppUser(long id, String userName, String password, String rol) {
+    public AppUser(long id, String username, String password, String rol) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.rol = rol;
     }
@@ -34,12 +34,12 @@ public class AppUser {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
