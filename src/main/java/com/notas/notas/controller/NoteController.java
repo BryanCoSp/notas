@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class NoteController {
     private final NoteService noteService;
 
-    @Autowired
     public NoteController(NoteService noteService) {
         this.noteService = noteService;
     }
@@ -25,7 +24,7 @@ public class NoteController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("note", noteService.findById(id).orElseThrow());
+        model.addAttribute("note", noteService.findById(id).orElseThrow(() -> new NoteNotFoundException(id)));
         return "showNote";
     }
 

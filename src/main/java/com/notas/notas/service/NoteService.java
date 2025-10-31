@@ -4,9 +4,7 @@ import com.notas.notas.model.Note;
 import com.notas.notas.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +19,13 @@ public class NoteService {
     }
 
     public List<Note> findAll() {
-        return noteRepository.findAll();
+        List<Note> notes = noteRepository.findAll();
+        for  (Note note : notes) {
+            if (note.getContent().length() > 300) {
+                note.setContent(note.getContent().substring(0, 300));
+            }
+        }
+        return notes;
     }
 
     public Optional<Note> findById(@PathVariable Long id) {
