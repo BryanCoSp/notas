@@ -196,6 +196,10 @@ button:hover {
 .noteContent {
     padding: 8px;
     font-size: 12px;
+    height: 100%;
+    word-wrap: break-word;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
 }
 
 .deleteButton{
