@@ -10,8 +10,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -48,5 +50,52 @@ public class TestNoteService {
         assertEquals("Contenido de nota 2", resultado.get(1).getContent());
     }
 
-//    public void
+    @Test
+    public void testGetNoteById() {
+        Note note = new Note();
+        note.setId(1);
+        note.setTitle("Titulo nota 1");
+        note.setContent("Contenido de nota 1");
+
+        when(noteRepository.findById(1L)).thenReturn(Optional.of(note));
+
+        Note res = noteService.findById(1L).get();
+
+        assertEquals("Titulo nota 1", res.getTitle());
+        assertEquals("Contenido de nota 1", res.getContent());
+    }
+
+    @Test
+    public void testSaveNoteEmpty() {
+        Note note = new Note();
+        note.setId(1L);
+
+        when(noteRepository.save(note)).thenReturn(note);
+        when(noteRepository.findById(1L)).thenReturn(Optional.of(note));
+
+        Note res1 = noteService.save(note);
+        Note res2 = noteService.findById(1L).get();
+
+        assertEquals(res1.getContent(), res2.getContent());
+        assertEquals(res1.getTitle(), res2.getTitle());
+        assertEquals(res1.getId(), res2.getId());
+        assertEquals( "New note", res1.getTitle());
+        assertNull(res2.getContent());
+    }
+
+    @Test
+    public void testSaveNote() {
+        Note note = new Note();
+        note.setId(1L);
+        note.setTitle("Titulo nota 1");
+        note.setContent("Contenido de nota 1");
+
+        when(noteRepository.save(note)).thenReturn(note);
+
+        Note res = noteService.save(note);
+
+        assertEquals("Titulo nota 1", res.getTitle());
+        assertEquals("Contenido de nota 1", res.getContent());
+        assertEquals(1L, res.getId());
+    }
 }
