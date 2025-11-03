@@ -15,6 +15,7 @@ public class GlobalExceptionHandler {
 
         ModelAndView mav = new ModelAndView("errorView");
         mav.addObject("error", error);
+        mav.setStatus(status);
         return mav;
     }
 
@@ -26,6 +27,19 @@ public class GlobalExceptionHandler {
 
         ModelAndView mav = new ModelAndView("errorView");
         mav.addObject("error", error);
+        mav.setStatus(status);
+        return mav;
+    }
+
+    @ExceptionHandler(ServiceTechnicalException.class)
+    public ModelAndView handleServiceError(ServiceTechnicalException ex){
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        ErrorResponse error = new ErrorResponse(status.value(), ex.getMessage());
+
+        ModelAndView mav = new ModelAndView("errorView");
+        mav.addObject("error", error);
+        mav.setStatus(status);
         return mav;
     }
 }

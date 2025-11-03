@@ -3,7 +3,6 @@ package com.notas.notas.controller;
 import com.notas.notas.exception.NoteNotFoundException;
 import com.notas.notas.model.Note;
 import com.notas.notas.service.NoteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

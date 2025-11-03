@@ -1,5 +1,6 @@
 package com.notas.notas.service;
 
+import com.notas.notas.exception.IncorrectDataException;
 import com.notas.notas.model.Note;
 import com.notas.notas.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
