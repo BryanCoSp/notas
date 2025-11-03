@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,10 +27,12 @@ public class TestNoteController {
     @Test
     public void saveNoteTest() throws Exception {
         String newNoteJson = "{\"title\": \"Note\", \"content\": \"hola\"}";
-        mockMvc.perform(post("/submit").contentType(MediaType.APPLICATION_JSON).content(newNoteJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Note"))
-                .andExpect(jsonPath("$.content").value("hola"))
-                .andExpect(jsonPath("$.id").exists());
+        mockMvc.perform(post("/submit").with(user("testUser").roles("USER"))
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON).content(newNoteJson))
+                .andExpect(status().is3xxRedirection());
+
+        mockMvc.perform(get("/1").with(user("testUser").roles("USER"))
+                .with(csrf())).andExpect(status().isOk());
     }
 }
