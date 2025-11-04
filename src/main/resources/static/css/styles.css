@@ -136,6 +136,7 @@ button:hover {
     text-overflow: ellipsis;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .note:hover {
@@ -210,4 +211,39 @@ button:hover {
 
 .deleteButton:hover {
     background-color: red;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    background-color: #57c6e3;
+    width: 100%;
+    height: fit-content;
+}
+
+.header h1 {
+    margin-left: 2em;
+}
+
+.header form {
+    margin-right: 2em;
+}
+
+body {
+    margin: 0;
+}
+
+.header form input {
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+.header form input:hover {
+    background-color: #008CBA;
+    transition-duration: 0.2s;
+    color: white;
 }
