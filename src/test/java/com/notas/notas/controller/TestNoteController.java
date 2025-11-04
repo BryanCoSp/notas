@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,12 +28,29 @@ public class TestNoteController {
     @Test
     public void saveNoteTest() throws Exception {
         String newNoteJson = "{\"title\": \"Note\", \"content\": \"hola\"}";
-        mockMvc.perform(post("/submit").with(user("testUser").roles("USER"))
+        mockMvc.perform(post("/submit")
+                        .with(user("testUser").roles("USER"))
                         .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON).content(newNoteJson))
-                .andExpect(status().is3xxRedirection());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newNoteJson))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(jsonPath("$.description").value("hola"));
+    }
 
-//        mockMvc.perform(get("/1").with(user("testUser").roles("USER"))
-//                .with(csrf())).andExpect(status().isOk());
+    @Test
+    void debeCrearUnaNuevaNotePorApi() throws Exception {
+        String newNoteJson = "{\"title\": \"Note title\",\"description\": \"Noteeeeeee2 test\", \"completed\":false}";
+
+        mockMvc.perform(post("/api/notas")
+                        .with(user("testUser").roles("USER"))
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newNoteJson))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.description").value("Noteeeeeee2 test"))
+                .andExpect(jsonPath("$.id").exists());
+
+
     }
 }
+

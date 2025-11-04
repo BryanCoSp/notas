@@ -1,6 +1,7 @@
 package com.notas.notas.service;
 
 import com.notas.notas.exception.IncorrectDataException;
+import com.notas.notas.exception.ServiceTechnicalException;
 import com.notas.notas.model.Note;
 import com.notas.notas.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ import java.util.Optional;
 
 @Service
 public class NoteService {
-    private NoteRepository noteRepository;
+    private final NoteRepository noteRepository;
 
     @Autowired
-    public void NoteService(NoteRepository noteRepository) {
+    public NoteService(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
 
@@ -37,7 +38,12 @@ public class NoteService {
         if(note.getTitle() == null || note.getTitle().isEmpty()){
             note.setTitle("New note");
         }
-        return noteRepository.save(note);
+        try{
+            return noteRepository.save(note);
+        }catch(Exception e){
+            throw new ServiceTechnicalException(e.getMessage());
+        }
+
     }
 
     public void delete(Long id) {

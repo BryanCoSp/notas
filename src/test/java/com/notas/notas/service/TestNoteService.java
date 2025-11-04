@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -96,6 +95,25 @@ public class TestNoteService {
 
         assertEquals("Titulo nota 1", res.getTitle());
         assertEquals("Contenido de nota 1", res.getContent());
+        assertEquals(1L, res.getId());
+    }
+
+    @Test
+    public void testUpdateNote() {
+        Note note = new Note();
+        note.setId(1L);
+        note.setTitle("Titulo");
+        note.setContent("Contenido de nota");
+
+        when(noteRepository.save(note)).thenReturn(note);
+
+        note.setTitle("Titulo editado");
+        note.setContent("Contenido de editado");
+
+        Note res = noteService.update(note);
+
+        assertEquals("Titulo editado", res.getTitle());
+        assertEquals("Contenido de editado", res.getContent());
         assertEquals(1L, res.getId());
     }
 }
