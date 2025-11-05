@@ -2,6 +2,8 @@ package com.notas.notas.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class AppUser {
     @Id
@@ -29,6 +31,17 @@ public class AppUser {
     public Long getId() {
         return id;
     }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<Note> notes = new java.util.ArrayList<>();
 
     public void setId(Long id) {
         this.id = id;

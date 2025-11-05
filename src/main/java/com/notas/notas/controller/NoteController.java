@@ -3,6 +3,8 @@ package com.notas.notas.controller;
 import com.notas.notas.exception.NoteNotFoundException;
 import com.notas.notas.model.Note;
 import com.notas.notas.service.NoteService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,37 +18,37 @@ public class NoteController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("notes", noteService.findAll());
+    public String index(Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("notes", noteService.findAllFor(user.getUsername()));
         return "index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("note", noteService.findById(id).orElseThrow(() -> new NoteNotFoundException(id)));
+    public String show(@PathVariable Long id, Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("note", noteService.findByIdFor(id, user.getUsername()).orElseThrow(() -> new NoteNotFoundException(id)));
         return "showNote";
     }
 
     @GetMapping("/newNote")
-    public String obtenerListaNotas(Model model) {
+    public String getNewNoteFragment(Model model) {
         return "fragments/newNote :: popup";
     }
 
     @PostMapping("/submit")
-    public String save(@ModelAttribute Note note) {
-        noteService.save(note);
+    public String save(@ModelAttribute Note note, @AuthenticationPrincipal User user) {
+        noteService.saveFor(note, user.getUsername());
         return "redirect:/";
     }
 
     @PostMapping("/delete")
-    public String delete(Long id) {
-        noteService.delete(id);
+    public String delete(Long id,  @AuthenticationPrincipal User user) {
+        noteService.deleteFor(id, user.getUsername());
         return "redirect:/";
     }
 
     @PostMapping("/updateNote")
-    public String update(Note note) {
-        noteService.save(note);
+    public String update(Note note,  @AuthenticationPrincipal User user) {
+        noteService.saveFor(note, user.getUsername());
         return "redirect:/";
     }
 

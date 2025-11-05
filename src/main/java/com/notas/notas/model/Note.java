@@ -13,6 +13,9 @@ public class Note {
     @Column(columnDefinition = "TEXT")
     private String content;
     private Date creation_date;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private AppUser owner;
 
     public Note() {
         this.creation_date = new Date();
@@ -21,6 +24,14 @@ public class Note {
         this.title = titulo;
         this.content = descripcion;
         this.creation_date = new Date();
+    }
+
+    public AppUser getOwner() {
+        return owner;
+    }
+
+    public void setOwner(AppUser owner) {
+        this.owner = owner;
     }
 
     public long getId() {
