@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="mainBodyPopup" class="newNotePopupBody" th:fragment="popup">
-    <form action="/submit" th:object="${note}" method="post" class="formStyle">
+    <form action="@{/submit}" th:object="${note}" method="post" class="formStyle">
         <div class="flexBox">
             <div class="flexLine">
                 <button type="reset" onclick="hideFragment();">Cancel</button>

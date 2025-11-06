@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+</head>
+<body>
     <title>Title</title>
     <h1 th:text="${error.status}"></h1>
     <p th:text="${error.message}"></p>
-    <a href="/">Volver al inicio</a>
-</head>
-<body>
-
+    <a href="@{/}">Volver al inicio</a>
 </body>
 </html>

@@ -15,7 +15,7 @@
 
 <div class="header">
     <h1>Tus notas</h1>
-    <form action="/logout" method="post">
+    <form action="@{/logout}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <input type="submit" value="Logout">
     </form>
@@ -31,7 +31,7 @@
             <div class="titleBar" >
                 <span th:text="${note.title}"></span>
                 <div class="titleBarButtons">
-                    <form action="/delete" method="post">
+                    <form action="@{/delete}" method="post">
                         <input type="hidden" name="id" th:value="${note.getId()}">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                         <button class="deleteNoteButton"><i class="material-icons" style="font-size: 20px">delete</i>
