@@ -1,6 +1,7 @@
 package com.notas.notas.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -9,12 +10,14 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Size(max = 100)
     private String title;
     @Column(columnDefinition = "TEXT")
     private String content;
+    @Column(name = "creation_date", updatable = false)
     private Date creation_date;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private AppUser owner;
 
     public Note() {
@@ -60,9 +63,5 @@ public class Note {
 
     public Date getCreation_date() {
         return creation_date;
-    }
-
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
     }
 }

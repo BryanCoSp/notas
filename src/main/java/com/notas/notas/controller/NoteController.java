@@ -40,13 +40,13 @@ public class NoteController {
         return "redirect:/";
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public String delete(Long id,  @AuthenticationPrincipal User user) {
         noteService.deleteFor(id, user.getUsername());
         return "redirect:/";
     }
 
-    @PostMapping("/updateNote")
+    @PutMapping("/updateNote")
     public String update(Note note,  @AuthenticationPrincipal User user) {
         noteService.saveFor(note, user.getUsername());
         return "redirect:/";
